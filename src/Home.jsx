@@ -48,7 +48,7 @@ export default function HomePage() {
               <option>₹5,000 - ₹10,000</option>
               <option>₹10,000 - ₹20,000</option>
               <option>₹20,000 - ₹30,000</option>
-              <option>Above ₹30,000</option>
+              <option>Above ₹40,000</option>
             </select>
             <button>Search</button>
           </div>
