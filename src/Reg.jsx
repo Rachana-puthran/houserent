@@ -1,7 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
+import { supabase } from "./supabase.js";
+// async function testSupabase() {
+//   const { data, error } = await supabase.from("reg").select("*").limit(1);
 
+//   if (error) {
+//     console.error("Supabase Error:", error);
+//   } else {
+//     console.log("Supabase Works!", data);
+//   }
+// }
+
+// testSupabase();
 export default function RegistrationPage() {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -14,7 +25,7 @@ export default function RegistrationPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
@@ -22,8 +33,24 @@ export default function RegistrationPage() {
       return;
     }
 
+    const { data, error } =await supabase.from("reg").insert([
+      {
+        name: formData.fullName,
+        email: formData.email,
+        password: formData.password,
+      },
+    ]);
+    if (error) {
+      console.error("Supabase Insert Error:", error);
+      alert("Registration failed!");
+      return;
+    }
+    else{
+      alert("Registration successful!");
+    }
+
     console.log("Form submitted:", formData);
-    alert("Registration successful!");
+    
   };
 
   return (
@@ -52,6 +79,7 @@ export default function RegistrationPage() {
             onChange={handleChange}
             required
             style={styles.input}
+            
           />
 
           <input
