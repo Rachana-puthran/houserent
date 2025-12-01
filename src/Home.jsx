@@ -15,8 +15,8 @@ export default function HomePage() {
           <div className="navbar-links">
               <Link to="/home" className="nav-link">Home</Link>
             <a href="#properties" className="nav-link">Properties</a>
-            <a href="#contact" className="nav-link">Contact</a>
-            <a href="#about" className="nav-link">About Us</a>
+            <a href="" className="nav-link">Contact</a>
+            <a href="/about" className="nav-link">About Us</a>
           </div>
         </div>
 

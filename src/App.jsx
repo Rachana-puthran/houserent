@@ -4,7 +4,10 @@ import viteLogo from '/vite.svg'
 import RegistrationPage from './Reg.jsx'
 import LoginPage from './Login.jsx'
 import { BrowserRouter , Route, Routes } from 'react-router-dom'
-import HomePage from './Home.jsx'
+import HomePage from './Home.jsx' 
+import AboutPage from './about.jsx' 
+ 
+
    
 
 
@@ -21,6 +24,8 @@ function App() {
       <Route path="/register" element={<RegistrationPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/home" element={<HomePage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/" element={<HomePage />} />
       </Routes>
     </BrowserRouter>
     </>

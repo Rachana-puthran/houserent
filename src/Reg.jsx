@@ -62,8 +62,8 @@ export default function RegistrationPage() {
         </Link>
         <div className="reg-links">
           <Link to="/home" className="reg-link">Home</Link>
-          <Link to="/home#contact" className="reg-link">Contact</Link>
-          <Link to="/home#about" className="reg-link">About Us</Link>
+          <Link to="" className="reg-link">Contact</Link>
+          <Link to="/about" className="reg-link">About Us</Link>
         </div>
       </header>
 

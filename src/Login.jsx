@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
+import { supabase } from "./supabase.js";
 
+import {useNavigate} from "react-router-dom";
 export default function LoginPage() {
+  const navigate=useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -12,12 +15,28 @@ export default function LoginPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    const { data, error } =await supabase
+      .from("reg")
+      .select("*")
+      .eq("email", formData.email)
+      .eq("password", formData.password)
+      
+      if (error) {
+        console.error("Supabase Login Error:", error);
+        alert("Login failed! Please check your credentials.");
+        return;
+      }
+      if (!data || data.length === 0) {
+        alert(`No user found with the provided credentials.${data}`);
+        return;
+      } else {
+       
+        navigate("/home");
+      }
 
-    console.log("Login submitted:", formData);
-    alert("Login successful!");
-  };
+    };
 
   return (
     <div style={styles.container}>
@@ -28,8 +47,8 @@ export default function LoginPage() {
         </Link>
         <div className="reg-links">
           <Link to="/home" className="reg-link">Home</Link>
-          <Link to="/home#contact" className="reg-link">Contact</Link>
-          <Link to="/home#about" className="reg-link">About Us</Link>
+          <Link to="" className="reg-link">Contact</Link>
+          <Link to="/about" className="reg-link">About Us</Link>
         </div>
       </header>
       <div style={styles.box}>
